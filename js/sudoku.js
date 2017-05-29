@@ -11,15 +11,18 @@ let	sudokuField=[
 	[6,7,8,9,1,2,3,4,5],
 	[9,1,2,3,4,5,6,7,8]
 ]
-// let leftblock=[1,2];
 
 function RandomDiap(N,M) {
     return Math.floor(
         Math.random()*(M-N+1)
         )+N;
 }
-
-
+//////// заменяем столбцы на строки
+var transposingArr = sudokuField.map(function(col, i) { 
+  return sudokuField.map(function(row) { 
+    return row[i] 
+  })
+});
 
 
 function shuffle_i(x,y) {
@@ -71,12 +74,14 @@ function fieldFPS () {
         function FF (V,I,A) {
         var br = document.createElement('br');
         	for (var i = 0; i < V.length; i++) {
+        		var span = document.createElement('span');
         		var txt = document.createTextNode(V[i]);
-  				field.appendChild(txt);
+  				field.appendChild(span);
+  				span.appendChild(txt);
         	}
         	field.appendChild(br)
         }
-        sudokuField.forEach(FF)
+        transposingArr.forEach(FF)
 }
 fieldFPS ()
 
